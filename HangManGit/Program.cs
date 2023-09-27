@@ -6,7 +6,7 @@ namespace hang_man_person3
     {
         public static void Main(string[] args)
         {
-            int NumTry = 5;
+            int NumTry = 6;
             Console.WriteLine(Result(NumTry));
         }
 
