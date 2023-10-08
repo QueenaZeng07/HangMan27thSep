@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Xml.Schema;
 
 namespace hngmban
 {
@@ -18,14 +19,36 @@ namespace hngmban
 
 
             int guesses = 0;
-
-            Console.WriteLine(UpdateGallows(guesses));
-
-
-
-
+            char guess = 'a';
             int numTry = guesses;
-            Console.WriteLine(Result(numTry));
+            int l = tobeguessed.Length;
+            string[] indexes = { "" };
+            for(int n = 0; n<l ; n++;)
+            {
+                indexes[n] = "_";
+
+            }
+            Console.WriteLine(indexes);
+
+            bool stop = false;
+            if (stop == false)
+            { Console.WriteLine(Guess(tobeguessed, guess));
+                Console.WriteLine(Result(numTry));
+                Console.WriteLine(UpdateGallows(guesses));
+                Console.WriteLine("Have you got the word?");
+                string word = Console.ReadLine();
+                if (word == tobeguessed)
+                {
+                    stop = true;
+                }
+                else
+                {
+                    stop = false;
+                }
+                
+            }
+            
+            
         }
 
         public static string UpdateGallows(int guesses)
@@ -191,6 +214,8 @@ namespace hngmban
 
         public static string[] Guess(string wordd, char guess)
         {
+            Console.WriteLine("please guess a letter");
+            
             string[] indexes = new string[wordd.Length];
             for (int i = 0; i < wordd.Length; i++)
             {
