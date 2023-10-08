@@ -23,10 +23,9 @@ namespace hngmban
             int numTry = guesses;
             int l = tobeguessed.Length;
             string[] indexes = { "" };
-            for(int n = 0; n<l ; n++;)
+            for (int n = 0; n < l; n++) ;
             {
                 indexes[n] = "_";
-
             }
             Console.WriteLine(indexes);
 
