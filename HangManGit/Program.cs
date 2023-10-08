@@ -26,11 +26,12 @@ namespace hngmban
             for (int n = 0; n < l; n++) ;
             {
                 indexes[n] = "_";
+                ;
             }
             Console.WriteLine(indexes);
 
             bool stop = false;
-            if (stop == false)
+            while (stop == false)
             { Console.WriteLine(Guess(tobeguessed, guess));
                 Console.WriteLine(Result(numTry));
                 Console.WriteLine(UpdateGallows(guesses));
