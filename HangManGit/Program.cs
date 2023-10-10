@@ -16,8 +16,7 @@ namespace hngmban
             string tobeguessed = "";
             Console.WriteLine("choose difficulty, write easy for easy, medium for medium, and hard for hard. and if you do none of the above you'll have to run this code again.");
             string difficulty = Console.ReadLine();
-            tobeguessed = chooseWord(difficulty, tobeguessed);
-            
+            tobeguessed = chooseWord(difficulty, tobeguessed); 
 
             char[] underscore = new char[tobeguessed.Length];
 
@@ -37,7 +36,8 @@ namespace hngmban
             while (stop == false)
             {
                 int numTry = guesses;
-                
+                int guessesleft = 7 - guesses;
+
 
 
 
@@ -53,6 +53,13 @@ namespace hngmban
                     {
                         Console.WriteLine("your guess was correct");
 
+                    }
+                    else {
+                        Console.WriteLine("your guess was wrong");
+                        guesses += 1;
+
+                        Console.WriteLine($"You now only have {guessesleft} guesses left!");
+                        Console.WriteLine(UpdateGallows(guesses));
                     }
 
                     for (int i = 0; i < indexesinword.Length; i++)
@@ -76,7 +83,10 @@ namespace hngmban
                     }
 
                 }
-
+                if (guessesleft == 0)
+                {
+                    stop = true;
+                }
 
 
 
@@ -85,6 +95,9 @@ namespace hngmban
 
 
             }
+
+            Console.WriteLine("Press Enter to quit");
+            Console.ReadLine();
 
 
         }
