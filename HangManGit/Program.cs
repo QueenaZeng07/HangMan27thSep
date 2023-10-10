@@ -1,54 +1,92 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices;
 using System.Xml.Schema;
 
 namespace hngmban
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string tobeguessed = "";
-            Console.WriteLine(
-                "choose difficulty, write easy for easy, medium for medium, and hard for hard. and if you do none of the above you'll have to run this code again.");
+            Console.WriteLine("choose difficulty, write easy for easy, medium for medium, and hard for hard. and if you do none of the above you'll have to run this code again.");
             string difficulty = Console.ReadLine();
-            Console.WriteLine(chooseWord(difficulty, tobeguessed));
+            tobeguessed = chooseWord(difficulty, tobeguessed);
+            
+
+            char[] underscore = new char[tobeguessed.Length];
+
+            for (int i = 0; i < tobeguessed.Length; i++)
+            {
+                underscore[i] = '_';
 
 
+            }
 
             int guesses = 0;
             char guess = 'a';
-            int numTry = guesses;
-            int l = tobeguessed.Length;
-            string[] indexes = { "" };
-            for (int n = 0; n < l; n++) ;
-            {
-                indexes[n] = "_";
-                ;
-            }
-            Console.WriteLine(indexes);
+            
+
 
             bool stop = false;
             while (stop == false)
-            { Console.WriteLine(Guess(tobeguessed, guess));
-                Console.WriteLine(Result(numTry));
-                Console.WriteLine(UpdateGallows(guesses));
-                Console.WriteLine("Have you got the word?");
-                string word = Console.ReadLine();
-                if (word == tobeguessed)
-                {
-                    stop = true;
-                }
-                else
-                {
-                    stop = false;
-                }
+            {
+                int numTry = guesses;
                 
+
+
+
+                Console.WriteLine(underscore);
+                Console.WriteLine("input letter or word!");
+                string guessed_word = Console.ReadLine();
+                if (guessed_word.Length == 1)
+                {
+                    char guessed_lettr = char.Parse(guessed_word);
+                    int[] indexesinword = Guess(tobeguessed, guessed_lettr);
+
+                    if (indexesinword.Length > 0)
+                    {
+                        Console.WriteLine("your guess was correct");
+
+                    }
+
+                    for (int i = 0; i < indexesinword.Length; i++)
+                    {
+                        underscore[indexesinword[i]] = guessed_lettr;
+                        Console.WriteLine(indexesinword[i]);
+
+                    }
+
+                    Console.WriteLine(underscore);
+                }
+                else {
+                    if (guessed_word == tobeguessed)
+                    {
+                        stop = true;
+                    }
+                    else
+                    {
+                        stop = false;
+                        Console.WriteLine(UpdateGallows(guesses));
+                    }
+
+                }
+
+
+
+
+
+
+
+
             }
-            
-            
+
+
         }
 
         public static string UpdateGallows(int guesses)
@@ -212,21 +250,25 @@ namespace hngmban
         }
 
 
-        public static string[] Guess(string wordd, char guess)
+        public static int[] Guess(string wordd, char guess)
         {
             Console.WriteLine("please guess a letter");
-            
-            string[] indexes = new string[wordd.Length];
+
+            int[] indexes = new int[wordd.Length];
+            int indexesI = 0;
+
+
             for (int i = 0; i < wordd.Length; i++)
             {
                 if (wordd[i] == guess)
                 {
-                    string index = Convert.ToString(i);
-                    indexes[i] = index;
-                    Console.WriteLine(indexes[i]);
+
+                    indexes[indexesI] = i;
+                    indexesI++;
+                    
                 }
             }
-            return indexes;
+            return indexes.Take(indexesI).ToArray(); // Return first indexesI items
         }
     }
 }
